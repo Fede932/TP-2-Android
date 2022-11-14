@@ -89,9 +89,4 @@ class RepositorioUsuarios {
         );
     }
 
-    fun getUserByEmail(email: String): DatosUsuario? {
-        return usuarios.find { usuarios -> usuarios.email == email }
-    }
-
-
 }

@@ -18,8 +18,6 @@ import com.bumptech.glide.Glide
 
 class ItemUsuario : AppCompatActivity() {
 
-    private lateinit var repoUsuario: RepositorioUsuarios
-//    private lateinit var usuario: DatosUsuario // Este Usuario no existe en esta parte
     private val COD_PERMISO_LLAMADA = 29384757
     private val permisoDeLlamada = Manifest.permission.CALL_PHONE
     private lateinit var phone: String
@@ -28,12 +26,6 @@ class ItemUsuario : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detalle_usuario)
-
-//        repoUsuario = RepositorioUsuarios()  // JM - COMENTADO // no hace falta inicializar el repo porque la data llega por los StringExtra
-//
-//        phone = usuario.telephone  // JM - COMENTADO // Esta data la sacas de los extra
-//        name = usuario.name  // JM - COMENTADO // Esta data la sacas de los extra
-
 
         val userName = intent.getStringExtra("name")
         if (userName == null) {
@@ -52,41 +44,29 @@ class ItemUsuario : AppCompatActivity() {
             throw IllegalArgumentException("No se obtuvo usuario")
         }
 
-//       JM AGREGADO // Faltaba obtener la imagen de los extra
         val userImage = intent.getStringExtra("image")
         if (userImage == null) {
             throw IllegalArgumentException("No se obtuvo usuario")
         }
 
-        phone = userPhone  // JM - AGREGADO
-        name = userName  // JM - AGREGADO // Aca seteo las var con la data del extra
-
-        // val quizaUsuario = repoUsuario.getUserByEmail(user)
-        // if (quizaUsuario == null) {
-        //     throw IllegalArgumentException("No hay usuario con ese email $user")
-        //   } else {
-        //         user = DatosUsuario(this)
-        //       }
+        phone = userPhone
+        name = userName
 
         val nombre: TextView = findViewById(R.id.item_nombre)
-//        nombre.text = usuario.name // JM - COMENTADO
-        nombre.text = userName // JM - AGREGADO
+        nombre.text = userName
 
         val mail: TextView = findViewById(R.id.item_mail)
-//        mail.text = usuario.email // JM - COMENTADO
-        mail.text = userMail // JM - AGREGADO
+        mail.text = userMail
 
         val contacto: TextView = findViewById(R.id.item_phone)
-//        contacto.text = usuario.telephone // JM - COMENTADO
-        contacto.text = userPhone // JM - AGREGADO
+        contacto.text = userPhone
 
         val direccion: TextView = findViewById(R.id.item_direccion)
-//        direccion.text = usuario.location.address // JM - COMENTADO
-        direccion.text = userAddres // JM - AGREGADO
+        direccion.text = userAddres
 
         val imagen: ImageView = findViewById(R.id.item_imagen)
-//        Glide.with(this).load(usuario.image).into(imagen) // JM - COMENTADO
-        Glide.with(this).load(userImage).into(imagen) // JM - AGREGADO
+
+        Glide.with(this).load(userImage).into(imagen)
 
         val iniciar = findViewById<Button>(R.id.llamar)
         iniciar.setOnClickListener {
@@ -127,9 +107,7 @@ class ItemUsuario : AppCompatActivity() {
         if (resolveInfos.size == 0) {
             Toast.makeText(this, "No tiene apps para mandar el mensaje", Toast.LENGTH_LONG).show()
         } else {
-            startActivity(intent)
-        }
-
+            startActivity(intent) }
 
 }
     private fun marcarNumero(phone: String) {
